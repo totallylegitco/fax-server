@@ -1,0 +1,7 @@
+ARG base
+FROM ${base}
+ARG SW_TOKEN
+
+# Install freeswitch
+COPY voip_setup.sh ./
+RUN SW_TOKEN="$SW_TOKEN" ./voip_setup.sh
