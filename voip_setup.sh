@@ -7,8 +7,12 @@ echo "Using $SW_TOKEN"
 
 wget --http-user=signalwire --http-password="$SW_TOKEN" -O /usr/share/keyrings/signalwire-freeswitch-repo.gpg https://freeswitch.signalwire.com/repo/deb/debian-release/signalwire-freeswitch-repo.gpg
 
-echo "machine freeswitch.signalwire.com login signalwire password $TOKEN" > /etc/apt/auth.conf
-echo "deb [signed-by=/usr/share/keyrings/signalwire-freeswitch-repo.gpg] https://freeswitch.signalwire.com/repo/deb/debian-release/ $(lsb_release -sc) main" > /etc/apt/sources.list.d/freeswitch.list
-echo "deb-src [signed-by=/usr/share/keyrings/signalwire-freeswitch-repo.gpg] https://freeswitch.signalwire.com/repo/deb/debian-release/ $(lsb_release -sc) main" >> /etc/apt/sources.list.d/freeswitch.list
+
+# Use the bookworm release instead of the ubuntu release
+RELEASE=bookworm
+
+echo "machine freeswitch.signalwire.com login signalwire password $SW_TOKEN" > /etc/apt/auth.conf
+echo "deb [signed-by=/usr/share/keyrings/signalwire-freeswitch-repo.gpg] https://freeswitch.signalwire.com/repo/deb/debian-release/ $RELEASE main" > /etc/apt/sources.list.d/freeswitch.list
+echo "deb-src [signed-by=/usr/share/keyrings/signalwire-freeswitch-repo.gpg] https://freeswitch.signalwire.com/repo/deb/debian-release/ $RELEASE main" >> /etc/apt/sources.list.d/freeswitch.list
 
 apt-get update
